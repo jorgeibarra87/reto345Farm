@@ -25,7 +25,7 @@ import com.example.retos345.services.ReservationService;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("api/Reservation")
-public class ReservationController {    
+public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
@@ -35,47 +35,49 @@ public class ReservationController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Reservation>> getReservations(){
+    public ResponseEntity<List<Reservation>> getReservations() {
         return new ResponseEntity<List<Reservation>>(this.reservationService.getListReservations(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservation(@PathVariable("id") int id){
+    public ResponseEntity<Reservation> getReservation(@PathVariable("id") int id) {
         return new ResponseEntity<Reservation>(this.reservationService.getReservation(id), HttpStatus.OK);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Void> crearReservation(@RequestBody Reservation reservation){
+    public ResponseEntity<Void> crearReservation(@RequestBody Reservation reservation) {
         this.reservationService.crearReservation(reservation);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarReservation(@PathVariable("id") int id){
+    public ResponseEntity<Void> eliminarReservation(@PathVariable("id") int id) {
         this.reservationService.eliminarReservation(id);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Void> actualizarReservation(@RequestBody Reservation reservation){
+    public ResponseEntity<Void> actualizarReservation(@RequestBody Reservation reservation) {
         this.reservationService.actualizarReservation(reservation.getIdReservation(), reservation);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
-    
+
     @GetMapping("/report-dates/{start}/{end}")
-    public ResponseEntity<List<Reservation>> getReservationsReportDates(@PathVariable("start") String start, @PathVariable("end") String end){
-        return new ResponseEntity<List<Reservation>>(this.reservationService.getReservationsReportDates(start, end),HttpStatus.OK);
+    public ResponseEntity<List<Reservation>> getReservationsReportDates(@PathVariable("start") String start,
+            @PathVariable("end") String end) {
+        return new ResponseEntity<List<Reservation>>(this.reservationService.getReservationsReportDates(start, end),
+                HttpStatus.OK);
     }
 
     @GetMapping("/report-status")
-    public ResponseEntity<String> getReservationsReportStatus(){
+    public ResponseEntity<String> getReservationsReportStatus() {
         return new ResponseEntity<String>(this.reservationService.getReservationsReportStatus(), HttpStatus.OK);
     }
 
     @GetMapping("/report-clients")
-    public ResponseEntity<List<ReportClient>> getReservationsReportClients(){
-        return new ResponseEntity<List<ReportClient>>(this.reservationService.getReservationsReportClients(), HttpStatus.OK);
+    public ResponseEntity<List<ReportClient>> getReservationsReportClients() {
+        return new ResponseEntity<List<ReportClient>>(this.reservationService.getReservationsReportClients(),
+                HttpStatus.OK);
     }
-
 
 }

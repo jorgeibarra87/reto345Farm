@@ -15,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation implements Serializable{
+public class Reservation implements Serializable {
 
-    //***** ATRIBUTOS *****
+    // ***** ATRIBUTOS *****
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
@@ -31,30 +31,29 @@ public class Reservation implements Serializable{
     @Column(name = "status")
     private String status;
 
-    //***** RELACIONES *****
-    //Relacion Muchos a uno. La Reservation tiene enlazados un Client y Un Farm
+    // ***** RELACIONES *****
+    // Relacion Muchos a uno. La Reservation tiene enlazados un Client y Un Farm
 
     @ManyToOne(optional = false)
-    @JsonIgnoreProperties(value = {"reservations"})
-	@JoinColumn(name = "farm_id")
-	private Farm farm;
+    @JsonIgnoreProperties(value = { "reservations" })
+    @JoinColumn(name = "farm_id")
+    private Farm farm;
 
     @ManyToOne(optional = false)
-    @JsonIgnoreProperties(value = {"messages", "reservations"})
-	@JoinColumn(name = "client_id")
-	private Client client;
+    @JsonIgnoreProperties(value = { "messages", "reservations" })
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     @Column(name = "score")
     private String score;
 
-    //***** CONSTRUCTOR *****
+    // ***** CONSTRUCTOR *****
     public Reservation() {
         this.status = "created";
         this.score = null;
     }
 
-
-    //***** METODOS *****
+    // ***** METODOS *****
 
     public Date getStartDate() {
         return startDate;
@@ -111,6 +110,5 @@ public class Reservation implements Serializable{
     public void setScore(String score) {
         this.score = score;
     }
-    
 
 }
